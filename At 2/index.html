@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikita Alentsyeu - Analyst | Graphic Designer | Creative Thinker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --accent: #00ff88;
+            --accent-2: #ff0066;
+            --text: #ffffff;
+            --text-dim: #888888;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, var(--accent) 2px, var(--accent) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, var(--accent) 2px, var(--accent) 4px);
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom-left-radius: 20px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .glitch {
+            font-size: 6rem;
+            font-weight: bold;
+            position: relative;
+            letter-spacing: 0.1em;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--accent-2);
+            animation: glitch-1 2s infinite;
+            clip: rect(44px, 450px, 56px, 0);
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--accent);
+            animation: glitch-2 3s infinite;
+            clip: rect(44px, 450px, 56px, 0);
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { clip: rect(42px, 9999px, 44px, 0); }
+            10% { clip: rect(12px, 9999px, 59px, 0); }
+            20% { clip: rect(48px, 9999px, 29px, 0); }
+            30% { clip: rect(18px, 9999px, 83px, 0); }
+            40% { clip: rect(67px, 9999px, 95px, 0); }
+            50% { clip: rect(24px, 9999px, 49px, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { clip: rect(65px, 9999px, 119px, 0); }
+            15% { clip: rect(82px, 9999px, 27px, 0); }
+            30% { clip: rect(38px, 9999px, 98px, 0); }
+            45% { clip: rect(54px, 9999px, 15px, 0); }
+            60% { clip: rect(19px, 9999px, 106px, 0); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-top: 1rem;
+            letter-spacing: 0.3em;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--accent);
+            animation: blink 0.7s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '<';
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+
+        .section-title::after {
+            content: '/>';
+            color: var(--accent);
+            margin-left: 1rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid #222;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.5s;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            border-color: var(--accent);
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-number {
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-weight: bold;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            letter-spacing: 0.1em;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-left: 3px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-category:hover::before {
+            left: 100%;
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10rem;
+            color: var(--bg-dark);
+            font-weight: bold;
+            opacity: 0.3;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-link {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            z-index: -1;
+        }
+
+        .contact-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .contact-link:hover {
+            color: var(--bg-dark);
+        }
+
+        .email-display {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-top: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            border-top: 1px solid #222;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .glitch { font-size: 4rem; }
+            .section-title { font-size: 3rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-container { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 2.5rem; }
+            .subtitle { font-size: 1rem; }
+            nav { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="cursor" id="cursor"></div>
+
+    <nav>
+        <a href="#work">WORK</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Mikita Alentsyeu">Mikita Alentsyeu</h1>
+            <p class="subtitle">Analyst | Graphic Designer | Creative Thinker<span class="typing-cursor"></span></p>
+        </div>
+        <div class="scroll-indicator">▼ SCROLL</div>
+    </section>
+
+    <div class="container">
+        <section id="work">
+            <h2 class="section-title">Experience</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <h3 class="project-title">FREELANCE VISUALS</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">BRANDING</span>
+                        <span class="tech-tag">PHOTOSHOP</span>
+                        <span class="tech-tag">CONCEPT</span>
+                    </div>
+                    <p class="project-description">Executed commercial visual concepts and billboard designs during a US residency. Focused on high-impact large-format advertising and creative visual storytelling for client engagement.</p>
+                    <a href="https://docs.google.com/document/d/1_5aAW59rshLPMV7H7wbEk_qNvyC6l9vUSCHD9GuYIlI/edit?usp=sharing" class="project-link">VIEW PORTFOLIO →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <h3 class="project-title">ACADEMIC DESIGN</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">GRAPHIC DESIGN</span>
+                        <span class="tech-tag">PRINT</span>
+                        <span class="tech-tag">LAYOUT</span>
+                    </div>
+                    <p class="project-description">End-to-end creation of promotional materials for university events and holidays. Specialized in typography, poster design, and maintaining consistent visual identity across print media (2018–2023).</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">03</div>
+                    <h3 class="project-title">ANALYTICS & UX</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">WEB ANALYSIS</span>
+                        <span class="tech-tag">UX RESEARCH</span>
+                        <span class="tech-tag">DATA</span>
+                    </div>
+                    <p class="project-description">Integrative study at Warsaw Civitas University combining graphic design principles with data analytics. exploring how user data influences design choices and creative problem-solving.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">04</div>
+                    <h3 class="project-title">TECHNICAL STACK</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">FIGMA</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">BLENDER</span>
+                    </div>
+                    <p class="project-description">Continuous development of core digital competencies (2016–2024). Advanced coursework in interface design (Figma), 3D modeling (Blender), and structural web coding (HTML).</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">05</div>
+                    <h3 class="project-title">Languages</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">English</span>
+                        <span class="tech-tag">Russian</span>
+                        <span class="tech-tag">Polish</span>
+                    </div>
+                    <p class="project-description">I am a highly motivated and diligent student with experience in both English and Polish academic environments.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">06</div>
+                    <h3 class="project-title">CRYPTO PULSE</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">NEXT.JS</span>
+                        <span class="tech-tag">GRAPHQL</span>
+                        <span class="tech-tag">CHARTS</span>
+                    </div>
+                    <p class="project-description">Real-time cryptocurrency tracker with portfolio management, price alerts, and market analysis. Beautiful charts and comprehensive market data visualization.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">EXPERTISE</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>DESIGN</h3>
+                    <ul class="skill-list">
+                        <li>Figma / UI Design</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Visual Prototyping</li>
+                        <li>Creative Concepting</li>
+                        <li>Drawing / Illustration</li>
+                        <li>Layout & Typography</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>WEB & ANALYTICS</h3>
+                    <ul class="skill-list">
+                        <li>HTML / Basic Code</li>
+                        <li>Web Analysis</li>
+                        <li>UX Research</li>
+                        <li>Data Interpretation</li>
+                        <li>Problem Solving</li>
+                        <li>Academic Research</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>TOOLS</h3>
+                    <ul class="skill-list">
+                        <li>Blender (3D Basics)</li>
+                        <li>Team Collaboration</li>
+                        <li>MS Office Suite</li>
+                        <li>Figma / Design</li>
+                        <li>SEO & Analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">ABOUT</h2>
+            <div class="about-grid">
+                <div class="about-image"><img src="logo.png" style="width:100%" height="100%"></div>
+                <div class="about-text">
+    <p>Hey there! I'm a <span class="highlight">UX/UI Designer & Analyst</span> focused on bridging the gap between data and design.</p>
+    
+    <p>I believe successful projects require both <span class="highlight">designer taste</span> and analytical rigor. My academic background in English and Polish environments has trained me to solve complex problems with creativity and precision.</p>
+    
+    <p>When I'm not designing, you'll find me exploring new <span class="highlight">creative challenges</span> and constantly learning new tools to contribute to meaningful projects.</p>
+    
+    <p>Currently eager to support your team and help deliver <span class="highlight">successful results</span>.</p>
+</div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">GET IN TOUCH</h2>
+            <div class="contact-content">
+                <p style="font-size: 1.2rem; color: var(--text-dim);">Have a project in mind? Let's talk about it.</p>
+                <div class="email-display">malentsyeu@gmail.com</div>
+                <div class="contact-links">
+                    <a href="https://github.com/Nikita20746" class="contact-link" target="_blank" title="GitHub">GH</a>
+                    <a href="https://www.linkedin.com/in/mikita-alentsyeu-30ab10397/" class="contact-link" title="LinkedIn">IN</a>
+                    <a href="https://www.instagram.com/alennikkk/?next=%2F" class="contact-link" target="_blank" title="Instagram">IG</a>
+                    <a href="https://www.facebook.com/profile.php?id=61556606570071&locale=pl_PL" class="contact-link" title="FaceBook">FB</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>DESIGNED & BUILT BY Mikita Alentsyeu © 2026</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">CODED WITH ♥ AND COFFEE</p>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Hide scroll indicator on scroll
+        window.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100) {
+                indicator.style.opacity = '0';
+            } else {
+                indicator.style.opacity = '1';
+            }
+        });
+
+        // Parallax effect for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
